@@ -1,7 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from src.account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 from src.blog.models import BlogPost
+from .models import Account
 
 
 def registration_view(request):
@@ -82,3 +84,15 @@ def account_view(request):
 
 def must_authenticate_view(request):
 	return render(request, 'account/must_authenticate.html', {})
+
+
+def verify(request, uuid):
+    try:
+        user = Account.objects.get(verification_uuid=uuid, is_verified=False)
+    except Account.DoesNotExist:
+        raise Http404("User does not exist or is already verified")
+
+    user.is_verified = True
+    user.save()
+
+    return redirect('home')

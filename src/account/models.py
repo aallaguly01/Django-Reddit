@@ -1,5 +1,10 @@
+import uuid
+
+from django.core.mail import send_mail
+from django.db.models import signals
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from .tasks import send_verification_email
 
 
 class MyAccountManger(BaseUserManager):
@@ -42,6 +47,8 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_verified = models.BooleanField('verified', default=False)  # Add the `is_verified` flag
+    verification_uuid = models.UUIDField('Unique Verification UUID', default=uuid.uuid4)
     objects = MyAccountManger()
 
     USERNAME_FIELD = 'email'
@@ -57,3 +64,10 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+def user_post_save(sender, instance, signal, *args, **kwargs):
+    if not instance.is_verified:
+        # Send verification email
+        send_verification_email.delay(instance.pk)
+
+signals.post_save.connect(user_post_save, sender=Account)

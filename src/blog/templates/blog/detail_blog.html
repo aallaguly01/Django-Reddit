@@ -23,6 +23,7 @@
 				{% if blog_post.author == request.user %}
 			  		<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
 			  	{% endif %}
+				<p>{{blog_post.view_count}}</p>
 			</div>
 			<div class="card-footer text-muted">
 			  Posted on {{blog_post.date_published}} by {{blog_post.author}}

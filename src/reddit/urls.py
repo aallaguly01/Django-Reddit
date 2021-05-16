@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework_swagger.views import get_swagger_view
 
 from src.personal.views import (
@@ -30,6 +31,7 @@ from src.account.views import (
     login_view,
     account_view,
     must_authenticate_view,
+    verify,
 )
 
 schema_view = get_swagger_view(title='API')
@@ -45,6 +47,7 @@ urlpatterns = [
     path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('api/', include('api.urls', 'api')),
     path('docs/', schema_view),
+    re_path(r'^verify/(?P<uuid>[a-z0-9\-]+)/', verify, name='verify'),
 
 
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)

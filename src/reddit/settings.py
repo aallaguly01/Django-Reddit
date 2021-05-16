@@ -24,7 +24,7 @@ SECRET_KEY = 'f%ig_am$t%dz@vi&a!pyf-7j4s*0h0aj7whv$c&45ysjq%h2-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+#
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # During development only
 
@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'src.personal.middleware.timing',
 ]
 
 ROOT_URLCONF = 'reddit.urls'
@@ -87,8 +88,12 @@ WSGI_APPLICATION = 'reddit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'reddit_db',
+        'USER': 'postgres',
+        'PASSWORD': 'B1gather',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -145,3 +150,16 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'  # <-- Here
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'itis.11913gmail.com'
+EMAIL_HOST_PASSWORD = 'justforwork'
+EMAIL_PORT = 587
+
+# REDIS related settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
