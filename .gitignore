@@ -1,6 +1,7 @@
 # Django #
-.idea
+*.idea
 Scripsts
+*.png
 *.log
 *.pot
 *.pyc
