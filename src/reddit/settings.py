@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f%ig_am$t%dz@vi&a!pyf-7j4s*0h0aj7whv$c&45ysjq%h2-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 #
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # During development only
@@ -89,14 +89,13 @@ WSGI_APPLICATION = 'reddit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'reddit_db',
-        'USER': 'postgres',
-        'PASSWORD': 'B1gather',
-        'HOST': '127.0.0.1',
+        'NAME': 'd62g5lfeint9va',
+        'USER': 'xgrqeslsmrcpgc',
+        'PASSWORD': '8a4d39f32d286555f48cc3071c83aff8dcc41bb79327ca3b66d5c9dc5fd48e9d',
+        'HOST': 'ec2-34-206-8-52.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -158,8 +157,6 @@ EMAIL_HOST_PASSWORD = 'justforwork'
 EMAIL_PORT = 587
 
 # REDIS related settings
-REDIS_HOST = 'localhost'
-REDIS_PORT = '6379'
-BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_URL = 'redis://:p384cac3817d0d8ecc077b81092c45a3db58f183fd47f9384222c9a4fa8642a25@ec2-35-171-245-206.compute-1.amazonaws.com:31660/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
