@@ -1,7 +1,7 @@
 from django.template import Template, Context
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
-from src.reddit.celery import app
+from reddit.celery import app
 from .models import BlogPost
 
 REPORT_TEMPLATE = """

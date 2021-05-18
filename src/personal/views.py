@@ -2,8 +2,8 @@ from django.shortcuts import render
 from operator import attrgetter
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from src.blog.views import get_blog_queryset
-from src.blog.models import BlogPost
+from blog.views import get_blog_queryset
+from blog.models import BlogPost
 
 BLOG_POSTS_PER_PAGE = 10
 

@@ -1,8 +1,8 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from src.account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
-from src.blog.models import BlogPost
+from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
+from blog.models import BlogPost
 from .models import Account
 
 

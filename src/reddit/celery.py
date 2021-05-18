@@ -13,7 +13,7 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 app.conf.beat_schedule = {
     'send-report-every-single-minute': {
-        'task': 'src.blog.tasks.send_view_count_report',
+        'task': 'blog.tasks.send_view_count_report',
         'schedule': crontab(),  # change to `crontab(minute=0, hour=0)` if you want it to run daily at midnight
     },
 }

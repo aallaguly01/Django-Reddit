@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f%ig_am$t%dz@vi&a!pyf-7j4s*0h0aj7whv$c&45ysjq%h2-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 #
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # During development only
@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'src.personal',
-    'src.account',
-    'src.blog',
-    'src.like',
-    'src.api',
+    'personal',
+    'account',
+    'blog',
+    'like',
+    'api',
     'rest_framework',
     'rest_framework_swagger',
 ]
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'src.personal.middleware.timing',
+    'personal.middleware.timing',
 ]
 
 ROOT_URLCONF = 'reddit.urls'

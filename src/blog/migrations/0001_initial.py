@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import src.blog.models
+import blog.models
 
 
 class Migration(migrations.Migration):
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=50)),
                 ('body', models.TextField(max_length=500)),
-                ('image', models.ImageField(blank=True, null=True, upload_to=src.blog.models.upload_location)),
+                ('image', models.ImageField(blank=True, null=True, upload_to=blog.models.upload_location)),
                 ('date_published', models.DateTimeField(auto_now_add=True, verbose_name='date published')),
                 ('date_updated', models.DateTimeField(auto_now=True, verbose_name='date updated')),
                 ('slug', models.SlugField(blank=True, unique=True)),
